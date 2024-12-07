@@ -1,0 +1,5 @@
+click==7.1.2
+click-default-group==1.2.4
+danger-python==0.1.0
+pydantic==1.10.19
+typing_extensions==4.12.2
