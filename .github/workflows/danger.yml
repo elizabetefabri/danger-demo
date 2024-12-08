@@ -24,4 +24,6 @@ jobs:
           python3 -m pip install --upgrade pip
           pip install danger-python
       - name: Run Danger
+        env:
+          DANGER_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: danger-python ci
