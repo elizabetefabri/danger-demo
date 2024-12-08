@@ -1,6 +1,7 @@
 name: Danger
 
-on: pull_request
+on:
+  pull_request:
 
 jobs:
   danger:
@@ -11,9 +12,19 @@ jobs:
         uses: actions/setup-python@v4
         with:
           python-version: '3.8'
+      - name: Install Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+      - name: Add danger-js to PATH
+        run: echo "$(npm config get prefix)/bin" >> $GITHUB_PATH
       - name: Install dependencies
         run: |
+          npm install -g danger
           python3 -m pip install --upgrade pip
           pip install danger-python
       - name: Run Danger
+        env:
+          DANGER_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: danger-python ci
+
